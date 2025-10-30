@@ -60,7 +60,7 @@ Unit tests for endpoints## Author
 
 ## ⚙️ Setup Instructions
 1️⃣ Clone the Repository
-git clone https://github.com/raghuram-007/EventManagementAPI.git
+git clone https://github.com/raghuram-007/Event-Management-API-raghuram.git
 
 cd EventManagementAPI
 
