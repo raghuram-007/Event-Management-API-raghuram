@@ -45,8 +45,6 @@ Unit tests for endpoints## Author
 [![Django](https://img.shields.io/badge/Django-5.x-green?logo=django&logoColor=white)](https://www.djangoproject.com/)
 [![Django REST Framework](https://img.shields.io/badge/DRF-API-red?logo=django&logoColor=white)](https://www.django-rest-framework.org/)
 [![JWT](https://img.shields.io/badge/JWT-Authentication-yellow?logo=jsonwebtokens&logoColor=white)](https://jwt.io/)
-[![Celery](https://img.shields.io/badge/Celery-Task%20Queue-37814A?logo=celery&logoColor=white)](https://docs.celeryq.dev/en/stable/)
-[![Redis](https://img.shields.io/badge/Redis-Cache%20%26%20Broker-red?logo=redis&logoColor=white)](https://redis.io/)
 [![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
 [![Postman](https://img.shields.io/badge/Tested%20With-Postman-orange?logo=postman&logoColor=white)](https://www.postman.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-lightgrey.svg)](https://opensource.org/licenses/MIT)
@@ -62,7 +60,7 @@ Unit tests for endpoints## Author
 
 ## ⚙️ Setup Instructions
 1️⃣ Clone the Repository
-git clone https://github.com/raghuram/EventManagementAPI.git
+git clone https://github.com/raghuram-007/Event-Management-API-raghuram.git
 
 cd EventManagementAPI
 
