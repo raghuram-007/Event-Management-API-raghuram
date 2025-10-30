@@ -2,11 +2,13 @@ from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.shortcuts import get_object_or_404
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.exceptions import PermissionDenied, ValidationError
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from .models import Event, RSVP, Review
 from .serializers import EventSerializer, RSVPSerializer, ReviewSerializer
+from django.db import IntegrityError
+
 
 
 
@@ -67,8 +69,12 @@ class RSVPViewSet(viewsets.ModelViewSet):
                 event = Event.objects.get(id=event_id)
             except Event.DoesNotExist:
                 raise PermissionDenied('Event not found.')
-            # ✅ Save with actual event object
-            serializer.save(user=self.request.user, event=event)
+
+            # ✅ Handle duplicate RSVP gracefully
+            try:
+                serializer.save(user=self.request.user, event=event)
+            except IntegrityError:
+                raise ValidationError("You have already RSVP'd for this event.")
         else:
             serializer.save(user=self.request.user)
 
@@ -88,7 +94,17 @@ class RSVPViewSet(viewsets.ModelViewSet):
         serializer.save()
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def destroy(self, request, *args, **kwargs):
+        event_id = self.kwargs.get('event_id')
+        rsvp_id = self.kwargs.get('pk')
+        rsvp = get_object_or_404(RSVP, id=rsvp_id, event_id=event_id)
 
+        if rsvp.user != request.user:
+            raise PermissionDenied("You can only delete your own RSVP.")
+
+        rsvp.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 # --- Review ViewSet ---
 class ReviewViewSet(viewsets.ModelViewSet):

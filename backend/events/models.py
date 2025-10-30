@@ -42,6 +42,7 @@ class RSVP(models.Model):
 
     class Meta:
         unique_together = ('event', 'user')
+        ordering = ['-created_at']
 
     def __str__(self):
         return f"{self.user.username} - {self.event.title} ({self.status})"
